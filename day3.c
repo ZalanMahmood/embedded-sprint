@@ -1,6 +1,13 @@
 /* #include <stdio.h>
 #include <stdint.h>
 
+typedef struct 
+{
+    uint8_t id;
+    uint16_t temperature;
+    uint8_t humidity;
+} SensorReading;
+
 typedef struct // this is a new concept for me
 {
     uint8_t id;
@@ -50,13 +57,35 @@ int main(void)
 #include <stdint.h>
 
 
+typedef struct 
+{
+    uint8_t id;
+    uint16_t temperature;
+    uint8_t humidity;
+} SensorReading;
+
+void print_sensor(const SensorReading *s){
+    printf("id through pointer: %u\n", s->id);
+    printf("temperature through pointer: %u\n", s->temperature);
+    printf("humidity through pointer: %u\n", s->humidity);
+}
+
+
 #define BIT_LED0 (1u << 0)  // bit 0, value 1   // this is a new concept for me
 #define BIT_LED1 (1u << 1)  // bit 1, value 2
 #define BIT_LED3 (1u << 3) // bit 3, value 8 
 
 int main(void)
 {
-    
+    SensorReading sensor1 = {1, 250, 60};
+    SensorReading sensor2 = {2, 180, 45};
+
+    SensorReading *p1 = &sensor1;    
+    SensorReading *p2 = &sensor2;
+
+    print_sensor(p1);
+    print_sensor(p2);
+
     uint8_t status = 0;
 
     status = status | BIT_LED1; 
